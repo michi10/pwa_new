@@ -1,7 +1,7 @@
 /* ============================================================================
    CWS PWA – App Shell
    - Routing, Splash, Settings, Personalisierung, Progressive Loading
-   - Widgets werden on-demand geladen (Shadow DOM), Demodaten via data/demo.js
+   - Widgets werden on-demand geladen, Demodaten via data/demo.js
    ============================================================================ */
 
 const routes = {
@@ -63,6 +63,7 @@ $('#saveSettings').addEventListener('click', (e) => {
 function applyUiPrefs(){
   document.documentElement.classList.toggle('dark', state.ui.dark);
   document.documentElement.classList.toggle('hc', state.ui.highContrast);
+  document.documentElement.classList.toggle('reduce', state.ui.reduceMotion);
 }
 
 /* ---------------- Router ---------------- */

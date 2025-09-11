@@ -18,8 +18,12 @@
       const v = (total * (0.7 + Math.random()*0.6)).toFixed(1);
       const el = document.createElement('div');
       el.className = 'item';
-      el.innerHTML = `<div><strong>${s.name}</strong><div style="color:var(--cws-muted)">im Zeitraum</div></div>
-                      <div class="amount">${v} mm</div>`;
+      el.innerHTML = `
+          <div>
+            <strong>${s.name}</strong>
+            <div style="color:var(--cws-muted)">im Zeitraum</div>
+          </div>
+          <div class="amount">${v} mm</div>`;
       list.appendChild(el);
     }
   }
