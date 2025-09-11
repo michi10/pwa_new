@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>CWS – Wetter</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#10658e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        referrerpolicy="no-referrer" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Splash (leicht animiert, barrierearm) -->
+  <div id="splash" aria-live="polite" aria-label="Ladevorgang" class="splash visible">
+    <img src="assets/icon-192.png" alt="CWS Logo" width="128" height="128" />
+    <p id="splashText">App wird geladen…</p>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Fortschritt">
+      <div class="bar" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- App-Header -->
+  <header id="appHeader" class="app-header" aria-label="Kopfzeile">
+    <h1 class="brand">CWS</h1>
+    <div class="title" id="pageTitle">Dashboard</div>
+    <button id="btnSettings" class="icon-btn" aria-label="Einstellungen öffnen">
+      <i class="fa-solid fa-gear"></i>
+    </button>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main id="app" class="app" role="main" aria-live="polite"></main>
+
+  <!-- Bottom Nav -->
+  <nav id="nav" class="nav" role="tablist" aria-label="Navigation">
+    <button class="nav-btn active" data-route="dashboard" role="tab" aria-selected="true" aria-label="Startseite">
+      <i class="fa-solid fa-house"></i><span>Home</span>
+    </button>
+    <button class="nav-btn" data-route="map" role="tab" aria-selected="false" aria-label="Karte">
+      <i class="fa-solid fa-map"></i><span>Karte</span>
+    </button>
+    <button class="nav-btn" data-route="calendar" role="tab" aria-selected="false" aria-label="Kalender">
+      <i class="fa-solid fa-calendar"></i><span>Kalender</span>
+    </button>
+    <button class="nav-btn" data-route="rain" role="tab" aria-selected="false" aria-label="Niederschlag">
+      <i class="fa-solid fa-cloud-rain"></i><span>Regen</span>
+    </button>
+  </nav>
+
+  <!-- Settings-Dialog (AA/AAA-konform) -->
+  <dialog id="settings" class="modal" aria-modal="true" aria-label="Einstellungen">
+    <form method="dialog" class="card">
+      <header class="card-head">
+        <h2>Einstellungen</h2>
+        <button class="icon-btn" value="cancel" aria-label="Schließen">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+
+      <div class="card-body">
+        <fieldset class="group">
+          <legend>Darstellung</legend>
+          <label class="row">
+            <input type="checkbox" id="darkToggle" />
+            <span>Dark Mode aktivieren</span>
+          </label>
+          <label class="row">
+            <input type="checkbox" id="reduceMotion" />
+            <span>Animationen reduzieren</span>
+          </label>
+          <label class="row">
+            <input type="checkbox" id="highContrast" />
+            <span>Hohen Kontrast (AAA) aktivieren</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Personalisierung</legend>
+          <div class="row">
+            <input id="firstName" placeholder="Vorname" autocomplete="given-name" aria-label="Vorname" />
+            <input id="lastName" placeholder="Nachname" autocomplete="family-name" aria-label="Nachname" />
+          </div>
+          <p class="hint">Dein Name erscheint an mehreren Stellen (z. B. „Guten Morgen, Michael“).</p>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Datenquelle</legend>
+          <p class="hint">Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.</p>
+        </fieldset>
+      </div>
+
+      <footer class="card-foot">
+        <button class="btn primary" id="saveSettings" value="default">Speichern</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Daten & App -->
+  <script src="data/demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
