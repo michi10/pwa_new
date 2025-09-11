@@ -1,0 +1,5 @@
+#calendar { padding: 6px; }
+.fc-toolbar-title { color: var(--cws-primary); font-weight: 800; }
+.fc .fc-button { background: var(--cws-primary); border: none; border-radius: 10px; }
+.fc .fc-button:hover { filter: brightness(1.1); }
+.fc .fc-daygrid-day-number { color: var(--cws-text); }

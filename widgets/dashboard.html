@@ -1,0 +1,69 @@
+<!-- Dashboard: 2x breite KPI-Karten (Temperatur, Niederschlag, Wind, Luftfeuchte, UV/Licht)
+     – Optik & Struktur am TB-Widget angelehnt, AA/AAA-Kontrast gewährleistet -->
+<link rel="stylesheet" href="widgets/dashboard.css" />
+
+<section class="widget-12">
+  <div class="hero widget-card">
+    <div class="hero-row">
+      <div>
+        <div class="hello" id="helloText">Hallo!</div>
+        <div class="sub">Demodaten – ThingsBoard Anbindung folgt.</div>
+      </div>
+      <div class="now">
+        <div class="deg" id="nowDeg">--°</div>
+        <div class="hi-lo"><span id="nowHi">H --°</span> · <span id="nowLo">T --°</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="widget-6">
+  <div class="widget-card kpi" id="cardTemp">
+    <header><i class="fa-solid fa-thermometer-half"></i><h3>Temperatur</h3><span id="trendTemp" class="status">—</span></header>
+    <div class="kpi-grid">
+      <div><div class="label">Aktuell</div><div class="value" id="tempNow">--.- °C</div></div>
+      <div><div class="label">Min heute</div><div class="value" id="tempMin">--.- °C</div></div>
+      <div><div class="label">Max heute</div><div class="value" id="tempMax">--.- °C</div></div>
+    </div>
+    <div id="sparkTemp" class="spark"></div>
+  </div>
+</section>
+
+<section class="widget-6">
+  <div class="widget-card kpi" id="cardRain">
+    <header><i class="fa-solid fa-cloud-showers-heavy"></i><h3>Niederschlag</h3><span id="rainIntensity" class="status">—</span></header>
+    <div class="kpi-grid">
+      <div><div class="label">Heute</div><div class="value" id="rainToday">--.- mm</div></div>
+      <div><div class="label">Letzte Stunde</div><div class="value" id="rain1h">--.- mm</div></div>
+      <div><div class="label">24 h Summe</div><div class="value" id="rain24h">--.- mm</div></div>
+    </div>
+    <div id="sparkRain" class="spark"></div>
+  </div>
+</section>
+
+<section class="widget-6">
+  <div class="widget-card kpi" id="cardWind">
+    <header><i class="fa-solid fa-wind"></i><h3>Wind</h3><span id="trendWind" class="status">—</span></header>
+    <div class="kpi-grid">
+      <div><div class="label">Ø</div><div class="value" id="windAvg">--.- km/h</div></div>
+      <div><div class="label">Böe</div><div class="value" id="windGust">--.- km/h</div></div>
+      <div><div class="label">Richtung</div><div class="value" id="windDir">—</div></div>
+    </div>
+    <div id="sparkWind" class="spark"></div>
+  </div>
+</section>
+
+<section class="widget-6">
+  <div class="widget-card kpi" id="cardHum">
+    <header><i class="fa-solid fa-droplet"></i><h3>Luftfeuchte</h3><span id="trendHum" class="status">—</span></header>
+    <div class="kpi-grid">
+      <div><div class="label">Aktuell</div><div class="value" id="humNow">-- %</div></div>
+      <div><div class="label">Min heute</div><div class="value" id="humMin">-- %</div></div>
+      <div><div class="label">Max heute</div><div class="value" id="humMax">-- %</div></div>
+    </div>
+    <div id="sparkHum" class="spark"></div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script defer src="widgets/dashboard.js"></script>

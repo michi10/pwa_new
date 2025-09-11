@@ -1,0 +1,7 @@
+.rain-head { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--cws-border); }
+.rain-head h3 { margin:0; font-size:18px; }
+.rain-head .right { margin-left:auto; }
+.rain-body { padding: 12px 16px; }
+.list { display:grid; gap:10px; }
+.item { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid var(--cws-border); border-radius:12px; }
+.amount { font-weight: 800; color: var(--cws-primary); }

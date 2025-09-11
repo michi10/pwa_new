@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="widgets/rain.css" />
+<section class="widget-12 widget-card rain">
+  <header class="rain-head">
+    <h3><i class="fa-solid fa-cloud-rain"></i> Niederschlags-Übersicht</h3>
+    <div class="right">
+      <select id="range">
+        <option value="24">24 h</option>
+        <option value="48">48 h</option>
+        <option value="7d">7 Tage</option>
+        <option value="30d">30 Tage</option>
+      </select>
+    </div>
+  </header>
+  <div class="rain-body">
+    <div id="rainList" class="list" role="list"></div>
+  </div>
+</section>
+<script defer src="widgets/rain.js"></script>
