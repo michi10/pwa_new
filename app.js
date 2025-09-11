@@ -13,7 +13,7 @@ const routes = {
 
 const state = {
   user: { firstName: '', lastName: '' },
-  ui:   { dark: false, reduceMotion: false, highContrast: false },
+  ui:   { dark: false, reduceMotion: false, highContrast: false, largeText: false },
   route: 'dashboard'
 };
 
@@ -40,6 +40,7 @@ $('#btnSettings').addEventListener('click', () => {
   $('#darkToggle').checked = state.ui.dark;
   $('#reduceMotion').checked = state.ui.reduceMotion;
   $('#highContrast').checked = state.ui.highContrast;
+  $('#largeText').checked    = state.ui.largeText;
   dlg.showModal();
 });
 
@@ -50,6 +51,7 @@ $('#saveSettings').addEventListener('click', (e) => {
   state.ui.dark        = $('#darkToggle').checked;
   state.ui.reduceMotion= $('#reduceMotion').checked;
   state.ui.highContrast= $('#highContrast').checked;
+  state.ui.largeText   = $('#largeText').checked;
 
   save('cws_user', state.user);
   save('cws_ui', state.ui);
@@ -61,8 +63,11 @@ $('#saveSettings').addEventListener('click', (e) => {
 
 /* ---------------- UI Prefs ---------------- */
 function applyUiPrefs(){
-  document.documentElement.classList.toggle('dark', state.ui.dark);
-  document.documentElement.classList.toggle('hc', state.ui.highContrast);
+  const root = document.documentElement;
+  root.classList.toggle('dark', state.ui.dark);
+  root.classList.toggle('hc', state.ui.highContrast);
+  root.classList.toggle('reduce-motion', state.ui.reduceMotion);
+  root.classList.toggle('large-text', state.ui.largeText);
 }
 
 /* ---------------- Router ---------------- */

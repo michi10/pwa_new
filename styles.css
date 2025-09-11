@@ -127,6 +127,17 @@ body {
   .splash, .progress .bar { transition: none !important; }
 }
 
+/* Manuell reduzierte Bewegungen */
+:root.reduce-motion *,
+:root.reduce-motion *::before,
+:root.reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Große Schrift */
+:root.large-text { font-size: 112.5%; }
+
 /* High-Contrast sichtbare Fokusse */
 :root.hc .icon-btn:focus-visible,
 :root.hc .nav-btn:focus-visible { outline: 3px solid #000; }
