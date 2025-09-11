@@ -29,7 +29,11 @@ const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
 function load(k,def){ try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch { return def; } }
-function title(t){ $('#pageTitle').textContent = t; document.title = `CWS – ${t}`; }
+function title(t){
+  const nameSuffix = state.user.firstName ? ` – ${state.user.firstName}` : '';
+  $('#pageTitle').textContent = `${t}${nameSuffix}`;
+  document.title = `CWS – ${t}${nameSuffix}`;
+}
 
 /* ---------------- Settings ---------------- */
 const dlg = $('#settings');
@@ -54,6 +58,8 @@ $('#saveSettings').addEventListener('click', (e) => {
   save('cws_user', state.user);
   save('cws_ui', state.ui);
   applyUiPrefs();
+  title(routes[state.route].title);
+  document.dispatchEvent(new CustomEvent('cws:user', { detail: state.user }));
   dlg.close();
   // freundlicher Toast
   toast(`Danke, ${state.user.firstName || 'Freund'}! Einstellungen gespeichert.`);
@@ -63,6 +69,10 @@ $('#saveSettings').addEventListener('click', (e) => {
 function applyUiPrefs(){
   document.documentElement.classList.toggle('dark', state.ui.dark);
   document.documentElement.classList.toggle('hc', state.ui.highContrast);
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', state.ui.dark ? '#0b1220' : '#10658e');
+  }
 }
 
 /* ---------------- Router ---------------- */
