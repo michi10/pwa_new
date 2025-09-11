@@ -127,6 +127,9 @@ body {
   .splash, .progress .bar { transition: none !important; }
 }
 
+:root.reduce .splash,
+:root.reduce .progress .bar { transition: none !important; }
+
 /* High-Contrast sichtbare Fokusse */
 :root.hc .icon-btn:focus-visible,
 :root.hc .nav-btn:focus-visible { outline: 3px solid #000; }

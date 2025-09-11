@@ -12,7 +12,9 @@
   document.addEventListener('cws:user', (e)=>{
     const { firstName } = e.detail || {};
     const hello = document.getElementById('helloText');
-    if (firstName) hello.textContent = `Hallo ${firstName}!`;
+    const hours = new Date().getHours();
+    const part = hours < 12 ? 'Guten Morgen' : hours < 18 ? 'Guten Tag' : 'Guten Abend';
+    hello.textContent = firstName ? `${part}, ${firstName}!` : `${part}!`;
   });
 
   // NOW

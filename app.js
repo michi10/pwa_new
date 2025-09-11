@@ -18,9 +18,17 @@ const state = {
 };
 
 /* ---------------- Splash ---------------- */
-const splash = document.getElementById('splash');
-const bar    = document.getElementById('progressBar');
-function showSplash(to=10){ splash.classList.add('visible'); bar.style.width = `${to}%`; bar.setAttribute('aria-valuenow', to); }
+const splash     = document.getElementById('splash');
+const bar        = document.getElementById('progressBar');
+const splashText = document.getElementById('splashText');
+function showSplash(to=10){
+  splash.classList.add('visible');
+  splashText.textContent = state.user.firstName
+    ? `Willkommen zurück, ${state.user.firstName}!`
+    : 'App wird geladen…';
+  bar.style.width = `${to}%`;
+  bar.setAttribute('aria-valuenow', to);
+}
 function setProgress(to){ bar.style.width = `${to}%`; bar.setAttribute('aria-valuenow', to); }
 function hideSplash(){ splash.classList.remove('visible'); }
 
@@ -29,7 +37,11 @@ const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 function save(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
 function load(k,def){ try { return JSON.parse(localStorage.getItem(k)) ?? def; } catch { return def; } }
-function title(t){ $('#pageTitle').textContent = t; document.title = `CWS – ${t}`; }
+function title(t){
+  const nameSuffix = state.user.firstName ? ` – ${state.user.firstName}` : '';
+  $('#pageTitle').textContent = `${t}${nameSuffix}`;
+  document.title = `CWS – ${t}${nameSuffix}`;
+}
 
 /* ---------------- Settings ---------------- */
 const dlg = $('#settings');
@@ -54,6 +66,8 @@ $('#saveSettings').addEventListener('click', (e) => {
   save('cws_user', state.user);
   save('cws_ui', state.ui);
   applyUiPrefs();
+  title(routes[state.route].title);
+  document.dispatchEvent(new CustomEvent('cws:user', { detail: state.user }));
   dlg.close();
   // freundlicher Toast
   toast(`Danke, ${state.user.firstName || 'Freund'}! Einstellungen gespeichert.`);
@@ -63,6 +77,11 @@ $('#saveSettings').addEventListener('click', (e) => {
 function applyUiPrefs(){
   document.documentElement.classList.toggle('dark', state.ui.dark);
   document.documentElement.classList.toggle('hc', state.ui.highContrast);
+  document.documentElement.classList.toggle('reduce', state.ui.reduceMotion);
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', state.ui.dark ? '#0b1220' : '#10658e');
+  }
 }
 
 /* ---------------- Router ---------------- */
@@ -113,6 +132,16 @@ async function mount(route){
 /* ---------------- Nav ---------------- */
 $$('.nav-btn').forEach(btn => {
   btn.addEventListener('click', () => mount(btn.dataset.route));
+});
+
+$('#nav').addEventListener('keydown', e => {
+  const buttons = $$('.nav-btn', $('#nav'));
+  let idx = buttons.indexOf(document.activeElement);
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    idx = (idx + (e.key === 'ArrowRight' ? 1 : buttons.length - 1)) % buttons.length;
+    buttons[idx].focus();
+  }
 });
 
 /* ---------------- First-Run ---------------- */
