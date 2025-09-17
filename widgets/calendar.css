@@ -1,6 +1,47 @@
-#calendar { padding: 6px; }
-.fc-toolbar-title { color: var(--cws-primary); font-weight: 800; }
-.fc .fc-button { background: var(--cws-primary); border: none; border-radius: 10px; }
-.fc .fc-button:hover { filter: brightness(1.1); }
-.fc .fc-daygrid-day-number { color: var(--cws-text); }
- 
+#calendar {
+  padding: 12px;
+}
+
+.fc-toolbar-title {
+  color: var(--cws-primary-strong);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.fc .fc-button {
+  background: var(--cws-primary);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  padding-inline: 16px;
+  transition: filter var(--transition), transform var(--transition);
+}
+
+.fc .fc-button:hover {
+  filter: brightness(1.05);
+}
+
+.fc .fc-button:active {
+  transform: translateY(1px);
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background: var(--cws-primary-strong);
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid color-mix(in srgb, var(--cws-border) 70%, transparent);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.fc .fc-daygrid-day-number {
+  color: var(--cws-text);
+  font-weight: 600;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background: var(--cws-primary-soft);
+}
+
