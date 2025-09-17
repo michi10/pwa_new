@@ -80,6 +80,20 @@ const translations = {
     rain: 'Niederschlag',
     wind: 'Wind',
     humidity: 'Luftfeuchte',
+    metricDetailsTitle: 'Messwert-Details',
+    metricDetailsAria: 'Details zum Messwert',
+    metricDetailsStation: 'Station',
+    metricDetailsLocation: 'Position',
+    metricDetailsElevation: 'Höhe',
+    metricDetailsUnit: 'Einheit',
+    metricDetailsUpdated: 'Letzte Aktualisierung',
+    metricDetailsTrend: 'Trend',
+    metricDetailsTrendUp: 'steigend',
+    metricDetailsTrendDown: 'fallend',
+    metricDetailsTrendStable: 'stabil',
+    metricDetailsShow: 'Details anzeigen: {metric}',
+    metricDetailsNoData: 'Keine Detaildaten verfügbar.',
+    metricDetailsPeriod24h: 'letzte 24 h',
     current: 'Aktuell',
     minToday: 'Min heute',
     maxToday: 'Max heute',
@@ -209,6 +223,20 @@ const translations = {
     rain: 'Rain',
     wind: 'Wind',
     humidity: 'Humidity',
+    metricDetailsTitle: 'Measurement details',
+    metricDetailsAria: 'Measurement details dialog',
+    metricDetailsStation: 'Station',
+    metricDetailsLocation: 'Location',
+    metricDetailsElevation: 'Elevation',
+    metricDetailsUnit: 'Unit',
+    metricDetailsUpdated: 'Last update',
+    metricDetailsTrend: 'Trend',
+    metricDetailsTrendUp: 'rising',
+    metricDetailsTrendDown: 'falling',
+    metricDetailsTrendStable: 'steady',
+    metricDetailsShow: 'Show details: {metric}',
+    metricDetailsNoData: 'No detailed data available.',
+    metricDetailsPeriod24h: 'last 24 h',
     current: 'Current',
     minToday: 'Min today',
     maxToday: 'Max today',
@@ -281,6 +309,8 @@ const translations = {
     insightsAvgPerDay: 'Avg per day'
   }
 };
+
+window.CWS = window.CWS || {};
 
 const legalTexts = {
   privacy: {
@@ -808,6 +838,118 @@ function firstRun(){
   openSettingsDialog();
   save('cws_seen', true);
 }
+
+/* ---------------- Metric Details Dialog ---------------- */
+const metricDialog = $('#metricDialog');
+const metricDialogTitle = $('#metricDialogTitle');
+const metricDialogSubtitle = $('#metricDialogSubtitle');
+const metricDialogList = $('#metricDialogList');
+const metricDialogMeta = $('#metricDialogMeta');
+const metricDialogNote = $('#metricDialogNote');
+const metricDialogEmpty = $('#metricDialogEmpty');
+
+function resetMetricDialog(){
+  if (metricDialogList) {
+    metricDialogList.innerHTML = '';
+    metricDialogList.hidden = true;
+  }
+  if (metricDialogMeta) {
+    metricDialogMeta.innerHTML = '';
+    metricDialogMeta.hidden = true;
+  }
+  if (metricDialogNote) {
+    metricDialogNote.textContent = '';
+    metricDialogNote.hidden = true;
+  }
+  if (metricDialogEmpty) {
+    metricDialogEmpty.hidden = true;
+  }
+}
+
+function fillMetricItems(container, items){
+  if (!container) return false;
+  container.innerHTML = '';
+  if (!Array.isArray(items) || !items.length) {
+    container.hidden = true;
+    return false;
+  }
+  container.hidden = false;
+  items.forEach(item => {
+    const block = document.createElement('div');
+    block.className = 'metric-item';
+    const label = document.createElement('div');
+    label.className = 'metric-item-label';
+    label.textContent = item?.label ?? '';
+    const value = document.createElement('div');
+    value.className = 'metric-item-value';
+    value.textContent = item?.value ?? '';
+    block.append(label, value);
+    if (item?.hint) {
+      const hint = document.createElement('div');
+      hint.className = 'metric-item-hint';
+      hint.textContent = item.hint;
+      block.appendChild(hint);
+    }
+    container.appendChild(block);
+  });
+  return true;
+}
+
+function fillMetricMeta(container, meta){
+  if (!container) return false;
+  container.innerHTML = '';
+  if (!Array.isArray(meta) || !meta.length) {
+    container.hidden = true;
+    return false;
+  }
+  container.hidden = false;
+  meta.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'metric-meta-row';
+    const label = document.createElement('span');
+    label.className = 'metric-meta-label';
+    label.textContent = item?.label ?? '';
+    const value = document.createElement('span');
+    value.className = 'metric-meta-value';
+    value.textContent = item?.value ?? '';
+    row.append(label, value);
+    container.appendChild(row);
+  });
+  return true;
+}
+
+function showMetricDetails(detail={}){
+  if (!metricDialog) return;
+  resetMetricDialog();
+  const title = detail.title || t('metricDetailsTitle');
+  if (metricDialogTitle) metricDialogTitle.textContent = title;
+  if (metricDialogSubtitle) {
+    const subtitle = (detail.subtitle || '').toString().trim();
+    metricDialogSubtitle.textContent = subtitle;
+    metricDialogSubtitle.hidden = subtitle.length === 0;
+  }
+  const hasItems = fillMetricItems(metricDialogList, detail.items);
+  const hasMeta = fillMetricMeta(metricDialogMeta, detail.meta);
+  if (metricDialogNote) {
+    const note = (detail.note || '').toString().trim();
+    metricDialogNote.textContent = note;
+    metricDialogNote.hidden = note.length === 0;
+  }
+  if (metricDialogEmpty) {
+    const showEmpty = !(hasItems || hasMeta || ((detail.note || '').toString().trim().length > 0));
+    metricDialogEmpty.hidden = !showEmpty;
+    if (showEmpty) {
+      metricDialogEmpty.textContent = t('metricDetailsNoData');
+    }
+  }
+  metricDialog.showModal();
+}
+
+if (metricDialog) {
+  metricDialog.addEventListener('close', resetMetricDialog);
+}
+
+window.CWS.showMetricDetails = showMetricDetails;
 
 /* ---------------- Legal Buttons ---------------- */
 $$('.footer-btn[data-legal]').forEach(btn => {

@@ -188,6 +188,27 @@
     </form>
   </dialog>
 
+  <dialog id="metricDialog" class="modal metric-modal" aria-modal="true" data-i18n-aria-label="metricDetailsAria">
+    <form method="dialog" class="card">
+      <header class="card-head">
+        <h2 id="metricDialogTitle" data-i18n="metricDetailsTitle">Messwert-Details</h2>
+        <button class="icon-btn" value="cancel" data-i18n-aria-label="close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+      <div class="card-body metric-body">
+        <p class="metric-subtitle" id="metricDialogSubtitle" hidden></p>
+        <div class="metric-grid" id="metricDialogList"></div>
+        <div class="metric-meta" id="metricDialogMeta"></div>
+        <p class="metric-note" id="metricDialogNote" hidden></p>
+        <p class="metric-empty" id="metricDialogEmpty" hidden data-i18n="metricDetailsNoData">Keine Detaildaten verfügbar.</p>
+      </div>
+      <footer class="card-foot metric-foot">
+        <button class="btn primary" value="default" data-i18n="close">Schließen</button>
+      </footer>
+    </form>
+  </dialog>
+
   <dialog id="accessGate" class="modal gate-modal" aria-modal="true" data-i18n-aria-label="accessTitle">
     <form method="dialog" class="card">
       <header class="card-head">
