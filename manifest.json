@@ -3,8 +3,8 @@
   "short_name": "CWS",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0f7ae5",
-  "theme_color": "#0f7ae5",
+  "background_color": "#2380cf",
+  "theme_color": "#2380cf",
   "icons": [
     { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }

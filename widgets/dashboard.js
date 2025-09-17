@@ -83,7 +83,7 @@
     $('#trendHum').textContent = trendSymbol(hums);
 
     makeSpark('sparkTemp', temps, '#e11d48');
-    makeSpark('sparkRain', rains, '#0ea5e9');
+    makeSpark('sparkRain', rains, '#80c0ed');
     makeSpark('sparkWind', winds, '#22c55e');
     makeSpark('sparkHum', hums, '#f59e0b');
   }
