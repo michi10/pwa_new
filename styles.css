@@ -730,6 +730,61 @@ body.map-expanded #app {
   }
 }
 
+@media (max-width: 480px) {
+  .app {
+    padding: calc(var(--header-height) + 24px + var(--safe-area-top))
+             clamp(12px, 6vw, 20px)
+             calc(var(--nav-height) + 26px + var(--safe-area-bottom));
+    gap: 18px;
+  }
+
+  .app-header {
+    padding-inline: clamp(14px, 6vw, 20px);
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    box-shadow: 0 18px 32px -26px rgba(16, 44, 65, 0.45);
+  }
+
+  .station-picker {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .nav {
+    width: calc(100% - 14px);
+    gap: 4px;
+    border-radius: 20px;
+    padding: 8px 6px;
+  }
+
+  .nav-btn {
+    padding: 12px 6px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    gap: 2px;
+  }
+
+  .nav-btn i {
+    font-size: 1.2rem;
+  }
+
+  .nav-btn span {
+    font-size: 0.75rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .footer-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
+
 @media (min-width: 1280px) {
   .app {
     padding-inline: clamp(40px, 8vw, 64px);

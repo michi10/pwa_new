@@ -730,6 +730,29 @@ async function loadWidgetHtml(url){
   return await res.text();
 }
 
+async function activateWidgetScripts(root){
+  const scripts = $$('script', root);
+  for (const original of scripts) {
+    const script = document.createElement('script');
+    for (const attr of original.attributes) {
+      if (attr.name === 'defer' || attr.name === 'async') continue;
+      script.setAttribute(attr.name, attr.value);
+    }
+    script.async = false;
+    let ready = null;
+    if (script.src) {
+      ready = new Promise((resolve, reject) => {
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Script load failed: ${script.src}`));
+      });
+    } else {
+      script.textContent = original.textContent;
+    }
+    original.replaceWith(script);
+    if (ready) await ready;
+  }
+}
+
 async function mount(route){
   if (refreshTimer) {
     clearTimeout(refreshTimer);
@@ -756,6 +779,7 @@ async function mount(route){
     $('#app').innerHTML = '';
     $('#app').appendChild(host);
     translate(host);
+    await activateWidgetScripts(host);
     setProgress(70);
 
     document.dispatchEvent(new CustomEvent('cws:user', { detail: state.user }));
