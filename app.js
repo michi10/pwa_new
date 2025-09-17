@@ -8,7 +8,7 @@
 const state = {
   user: { firstName: '', lastName: '' },
   ui:   { dark: false, reduceMotion: false, highContrast: false },
-  app:  { units: 'metric', notifications: true, autoRefresh: true, favoriteStation: '' },
+  app:  { units: 'metric', notifications: true, autoRefresh: true, refreshInterval: 5, favoriteStation: '' },
   route: 'dashboard',
   lang: 'de'
 };
@@ -17,7 +17,8 @@ const routes = {
   dashboard: { titleKey: 'titleDashboard', file: 'widgets/dashboard.html' },
   map:       { titleKey: 'titleMap',       file: 'widgets/map.html' },
   calendar:  { titleKey: 'titleCalendar',  file: 'widgets/calendar.html' },
-  rain:      { titleKey: 'titleRain',      file: 'widgets/rain.html' }
+  rain:      { titleKey: 'titleRain',      file: 'widgets/rain.html' },
+  insights:  { titleKey: 'titleInsights',  file: 'widgets/insights.html' }
 };
 
 const translations = {
@@ -29,10 +30,12 @@ const translations = {
     titleMap: 'Karte',
     titleCalendar: 'Kalender',
     titleRain: 'Niederschlag',
+    titleInsights: 'Analysen',
     navHome: 'Home',
     navMap: 'Karte',
     navCalendar: 'Kalender',
     navRain: 'Regen',
+    navInsights: 'Analysen',
     settings: 'Einstellungen',
     close: 'Schließen',
     appearance: 'Darstellung',
@@ -47,10 +50,15 @@ const translations = {
     generalSettings: 'Allgemein',
     notifications: 'Benachrichtigungen zu Wetterereignissen',
     autoRefresh: 'Daten automatisch aktualisieren',
+    refreshInterval: 'Intervall',
+    refreshInterval2: 'Alle 2 Minuten',
+    refreshInterval5: 'Alle 5 Minuten',
+    refreshInterval15: 'Alle 15 Minuten',
     measurementUnits: 'Einheiten',
     unitsMetric: 'Metrisch (°C, km/h)',
     unitsImperial: 'Imperial (°F, mph)',
     favoriteStation: 'Lieblingsstation',
+    stationQuickSelect: 'Station',
     favoriteStationNone: 'Keine Auswahl',
     dataSource: 'Datenquelle',
     dataHint: 'Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.',
@@ -59,6 +67,8 @@ const translations = {
     navigation: 'Navigation',
     header: 'Kopfzeile',
     settingsSaved: 'Danke, {name}! Einstellungen gespeichert.',
+    favoriteUpdated: 'Lieblingsstation aktualisiert: {station}.',
+    favoriteCleared: 'Lieblingsstation entfernt.',
     friend: 'Freund',
     badgeDefault: 'Schön, dass du da bist!',
     badgeHello: 'Hallo {name}!',
@@ -124,7 +134,22 @@ const translations = {
     unitMillimeter: 'mm',
     unitInch: 'in',
     unitKmH: 'km/h',
-    unitMph: 'mph'
+    unitMph: 'mph',
+    insights: 'Analysen',
+    insightsTimeframe: 'Zeitraum',
+    insightsMetric: 'Messwert',
+    insightsTop: 'Höchster Wert',
+    insightsLow: 'Niedrigster Wert',
+    insightsNetworkAvg: 'Netzwerkdurchschnitt',
+    insightsRankingTitle: 'Stationsranking',
+    insightsBestDaysTitle: 'Spitzentage',
+    insightsBestDaysSubtitle: 'Top-Tage im Zeitraum',
+    insightsNoData: 'Keine Daten im ausgewählten Zeitraum.',
+    insightsFavoriteAction: 'Als Favorit setzen',
+    insightsFavoriteActive: 'Lieblingsstation',
+    insightsFavoritesHint: 'Tipp: Stern anwählen, um die Lieblingsstation zu wechseln.',
+    insightsRange60d: '60 Tage',
+    insightsAvgPerDay: 'Ø pro Tag'
   },
   en: {
     splashLoading: 'Loading app…',
@@ -134,10 +159,12 @@ const translations = {
     titleMap: 'Map',
     titleCalendar: 'Calendar',
     titleRain: 'Rain',
+    titleInsights: 'Insights',
     navHome: 'Home',
     navMap: 'Map',
     navCalendar: 'Calendar',
     navRain: 'Rain',
+    navInsights: 'Insights',
     settings: 'Settings',
     close: 'Close',
     appearance: 'Appearance',
@@ -152,10 +179,15 @@ const translations = {
     generalSettings: 'General',
     notifications: 'Weather alerts',
     autoRefresh: 'Refresh data automatically',
+    refreshInterval: 'Interval',
+    refreshInterval2: 'Every 2 minutes',
+    refreshInterval5: 'Every 5 minutes',
+    refreshInterval15: 'Every 15 minutes',
     measurementUnits: 'Units',
     unitsMetric: 'Metric (°C, km/h)',
     unitsImperial: 'Imperial (°F, mph)',
     favoriteStation: 'Favourite station',
+    stationQuickSelect: 'Station',
     favoriteStationNone: 'No selection',
     dataSource: 'Data source',
     dataHint: 'Currently demo data is used. Later, ThingsBoard will be connected here.',
@@ -164,6 +196,8 @@ const translations = {
     navigation: 'Navigation',
     header: 'Header',
     settingsSaved: 'Thanks, {name}! Settings saved.',
+    favoriteUpdated: 'Favourite station updated: {station}.',
+    favoriteCleared: 'Favourite station removed.',
     friend: 'friend',
     badgeDefault: 'Great to see you!',
     badgeHello: 'Hello {name}!',
@@ -229,7 +263,22 @@ const translations = {
     unitMillimeter: 'mm',
     unitInch: 'in',
     unitKmH: 'km/h',
-    unitMph: 'mph'
+    unitMph: 'mph',
+    insights: 'Insights',
+    insightsTimeframe: 'Time range',
+    insightsMetric: 'Metric',
+    insightsTop: 'Highest value',
+    insightsLow: 'Lowest value',
+    insightsNetworkAvg: 'Network average',
+    insightsRankingTitle: 'Station ranking',
+    insightsBestDaysTitle: 'Peak days',
+    insightsBestDaysSubtitle: 'Top days in range',
+    insightsNoData: 'No data in the selected range.',
+    insightsFavoriteAction: 'Set as favourite',
+    insightsFavoriteActive: 'Favourite',
+    insightsFavoritesHint: 'Tip: tap the star to change your favourite station.',
+    insightsRange60d: '60 days',
+    insightsAvgPerDay: 'Avg per day'
   }
 };
 
@@ -338,6 +387,8 @@ function normalizeAppState(){
   state.app.units = state.app.units === 'imperial' ? 'imperial' : 'metric';
   state.app.notifications = state.app.notifications !== false;
   state.app.autoRefresh = state.app.autoRefresh !== false;
+  const interval = Number(state.app.refreshInterval);
+  state.app.refreshInterval = Number.isFinite(interval) && interval > 0 ? interval : 5;
   if (state.app.favoriteStation === undefined) {
     const first = window.CWS_DEMO?.stations?.[0]?.id || '';
     state.app.favoriteStation = first;
@@ -389,22 +440,63 @@ function applyUiPrefs(){
 }
 
 function ensureStationOptions(){
-  const select = $('#favoriteStation');
-  if (!select) return;
+  const selects = [];
+  const settingsSelect = $('#favoriteStation');
+  const quickSelect = $('#stationQuickSelect');
+  if (settingsSelect) selects.push(settingsSelect);
+  if (quickSelect) selects.push(quickSelect);
+  if (!selects.length) return;
+
   const current = state.app.favoriteStation || '';
-  select.innerHTML = '';
-  const optNone = document.createElement('option');
-  optNone.value = '';
-  optNone.textContent = t('favoriteStationNone');
-  select.appendChild(optNone);
-  (window.CWS_DEMO?.stations || []).forEach(station => {
-    const opt = document.createElement('option');
-    opt.value = station.id;
-    opt.textContent = station.name;
-    select.appendChild(opt);
+  const stations = window.CWS_DEMO?.stations || [];
+
+  selects.forEach(select => {
+    const prev = select.value;
+    select.innerHTML = '';
+    const optNone = document.createElement('option');
+    optNone.value = '';
+    optNone.textContent = t('favoriteStationNone');
+    select.appendChild(optNone);
+    stations.forEach(station => {
+      const opt = document.createElement('option');
+      opt.value = station.id;
+      opt.textContent = station.name;
+      select.appendChild(opt);
+    });
+    select.value = current || prev || '';
   });
-  select.value = current;
 }
+
+const stationQuickSelect = $('#stationQuickSelect');
+stationQuickSelect?.addEventListener('change', () => {
+  state.app.favoriteStation = stationQuickSelect.value || '';
+  save('cws_app', state.app);
+  updateFooter();
+  ensureStationOptions();
+  broadcastPrefs(true);
+  if (state.app.favoriteStation) {
+    const station = getStationById(state.app.favoriteStation);
+    toast(t('favoriteUpdated').replace('{station}', station?.name || state.app.favoriteStation));
+  } else {
+    toast(t('favoriteCleared'));
+  }
+});
+
+document.addEventListener('cws:set-favorite', ev => {
+  const stationId = typeof ev.detail?.stationId === 'string' ? ev.detail.stationId : '';
+  if (stationId === state.app.favoriteStation) return;
+  state.app.favoriteStation = stationId;
+  save('cws_app', state.app);
+  updateFooter();
+  ensureStationOptions();
+  broadcastPrefs(true);
+  if (stationId) {
+    const station = getStationById(stationId);
+    toast(t('favoriteUpdated').replace('{station}', station?.name || stationId));
+  } else {
+    toast(t('favoriteCleared'));
+  }
+});
 
 function applyPersonalization(){
   const badge = $('#personalBadge');
@@ -445,6 +537,37 @@ function broadcastPrefs(immediate=false){
   const emit = () => document.dispatchEvent(new CustomEvent('cws:prefs', { detail: window.CWS_PREFS }));
   if (immediate) emit(); else setTimeout(emit, 0);
 }
+
+let refreshTimer = null;
+function scheduleAutoRefresh(immediate=false){
+  if (refreshTimer) {
+    clearTimeout(refreshTimer);
+    refreshTimer = null;
+  }
+  if (!state.app?.autoRefresh) return;
+  const minutes = Number(state.app.refreshInterval);
+  const delay = Math.max(1, Number.isFinite(minutes) ? minutes : 5) * 60 * 1000;
+  const run = async () => {
+    refreshTimer = null;
+    if (document.hidden) {
+      scheduleAutoRefresh();
+      return;
+    }
+    await mount(state.route);
+  };
+  refreshTimer = setTimeout(run, immediate ? 0 : delay);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    if (refreshTimer) {
+      clearTimeout(refreshTimer);
+      refreshTimer = null;
+    }
+  } else if (state.app?.autoRefresh) {
+    scheduleAutoRefresh(true);
+  }
+});
 
 function openLegal(kind){
   const dialog = $('#legalDialog');
@@ -590,7 +713,9 @@ $('#saveSettings').addEventListener('click', (e) => {
   document.documentElement.lang = state.lang;
   title(t(routes[state.route].titleKey));
   applyPersonalization();
+  ensureStationOptions();
   broadcastPrefs(true);
+  scheduleAutoRefresh();
   settingsDialog.close();
 
   if (state.lang !== prevLang) mount(state.route);
@@ -606,6 +731,10 @@ async function loadWidgetHtml(url){
 }
 
 async function mount(route){
+  if (refreshTimer) {
+    clearTimeout(refreshTimer);
+    refreshTimer = null;
+  }
   showSplash(8);
   const r = routes[route];
   state.route = route;
@@ -640,6 +769,7 @@ async function mount(route){
   } finally {
     setTimeout(hideSplash, 180);
   }
+  scheduleAutoRefresh();
 }
 
 /* ---------------- Navigation ---------------- */
@@ -689,6 +819,7 @@ if ('serviceWorker' in navigator) {
   applyUiPrefs();
   translate();
   broadcastPrefs(true);
+  ensureStationOptions();
   applyPersonalization();
 
   hideSplash();

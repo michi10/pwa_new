@@ -1,0 +1,198 @@
+.highlight-grid {
+  display: grid;
+  gap: clamp(16px, 3vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.highlight {
+  display: grid;
+  gap: 10px;
+  padding: clamp(16px, 4vw, 22px);
+  min-height: 160px;
+  background: color-mix(in srgb, var(--cws-primary-soft) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cws-primary) 12%, var(--cws-border));
+}
+
+.highlight .caption {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cws-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.highlight h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--cws-primary-strong);
+}
+
+.highlight .muted {
+  margin: 0;
+  color: color-mix(in srgb, var(--cws-muted) 82%, transparent);
+  font-size: 0.9rem;
+}
+
+.highlight .detail {
+  font-size: 0.78rem;
+}
+
+.insight-controls {
+  display: grid;
+  gap: 18px;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.control {
+  display: grid;
+  gap: 8px;
+}
+
+.control .label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--cws-muted);
+}
+
+.control select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--cws-border);
+  background: var(--cws-surface-solid);
+  color: var(--cws-text);
+  font-weight: 600;
+}
+
+.insights-split {
+  display: grid;
+  gap: clamp(16px, 3vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ranking-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--cws-border) 80%, transparent);
+  background: color-mix(in srgb, var(--cws-surface) 92%, transparent);
+}
+
+.ranking-item.fav {
+  background: color-mix(in srgb, var(--cws-primary-soft) 80%, transparent);
+  border-color: color-mix(in srgb, var(--cws-primary) 32%, transparent);
+}
+
+.ranking-item .info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ranking-item strong {
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ranking-item .muted {
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--cws-muted) 85%, transparent);
+}
+
+.ranking-item .value {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.favorite-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: color-mix(in srgb, var(--cws-muted) 80%, transparent);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 999px;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.favorite-btn:hover {
+  color: var(--cws-primary);
+  transform: scale(1.05);
+}
+
+.favorite-btn.active {
+  color: var(--cws-primary-strong);
+}
+
+.favorite-btn:focus-visible {
+  outline: 3px solid var(--cws-accent);
+  outline-offset: 2px;
+}
+
+.days-list {
+  display: grid;
+  gap: 12px;
+}
+
+.day-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--cws-border) 78%, transparent);
+  background: color-mix(in srgb, var(--cws-surface) 94%, transparent);
+}
+
+.day-entry .meta {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--cws-muted) 82%, transparent);
+}
+
+.day-entry strong {
+  font-size: 1rem;
+}
+
+.empty {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--cws-border) 80%, transparent);
+  color: color-mix(in srgb, var(--cws-muted) 90%, transparent);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .highlight-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ranking-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ranking-item .value {
+    font-size: 0.95rem;
+  }
+}
