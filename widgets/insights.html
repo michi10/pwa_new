@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="widgets/insights.css" />
+
+<section class="widget-12">
+  <div class="widget-card insight-controls">
+    <div class="controls-grid">
+      <label class="control">
+        <span class="label" data-i18n="insightsTimeframe">Zeitraum</span>
+        <select id="insightsRange">
+          <option value="7" data-i18n="range7d">7 Tage</option>
+          <option value="30" data-i18n="range30d">30 Tage</option>
+          <option value="60" data-i18n="insightsRange60d">60 Tage</option>
+        </select>
+      </label>
+      <label class="control">
+        <span class="label" data-i18n="insightsMetric">Messwert</span>
+        <select id="insightsMetric">
+          <option value="temperature" data-i18n="temperature">Temperatur</option>
+          <option value="rain" data-i18n="rain">Niederschlag</option>
+          <option value="wind" data-i18n="wind">Wind</option>
+          <option value="humidity" data-i18n="humidity">Luftfeuchte</option>
+        </select>
+      </label>
+    </div>
+    <p class="hint" data-i18n="insightsFavoritesHint">Tipp: Stern anwählen, um die Lieblingsstation zu wechseln.</p>
+  </div>
+</section>
+
+<section class="widget-12">
+  <div class="highlight-grid">
+    <article class="widget-card highlight" id="highlightTop">
+      <p class="caption" id="highlightTopTitle">—</p>
+      <h3 id="highlightTopValue">--</h3>
+      <p class="muted" id="highlightTopStation">—</p>
+      <p class="muted detail" id="highlightTopDetail"></p>
+    </article>
+    <article class="widget-card highlight" id="highlightLow">
+      <p class="caption" id="highlightLowTitle">—</p>
+      <h3 id="highlightLowValue">--</h3>
+      <p class="muted" id="highlightLowStation">—</p>
+      <p class="muted detail" id="highlightLowDetail"></p>
+    </article>
+    <article class="widget-card highlight" id="highlightNetwork">
+      <p class="caption" id="highlightNetworkTitle">—</p>
+      <h3 id="highlightNetworkValue">--</h3>
+      <p class="muted detail" id="highlightNetworkDetail"></p>
+    </article>
+  </div>
+</section>
+
+<section class="widget-12 insights-split">
+  <div class="widget-card ranking-card">
+    <header class="card-head">
+      <h3 data-i18n="insightsRankingTitle">Stationsranking</h3>
+    </header>
+    <div id="insightsEmpty" class="empty" hidden data-i18n="insightsNoData">Keine Daten im ausgewählten Zeitraum.</div>
+    <div id="insightsRanking" class="ranking-list" role="list"></div>
+  </div>
+
+  <div class="widget-card days-card">
+    <header class="card-head">
+      <h3 data-i18n="insightsBestDaysTitle">Spitzentage</h3>
+      <span class="subtitle" data-i18n="insightsBestDaysSubtitle">Top-Tage im Zeitraum</span>
+    </header>
+    <div id="insightsBestDays" class="days-list"></div>
+  </div>
+</section>
+
+<script defer src="widgets/insights.js"></script>
