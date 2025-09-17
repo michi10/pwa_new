@@ -3,7 +3,7 @@
   height: min(68vh, 760px);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 18px 32px -26px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 18px 32px -26px rgba(16, 44, 65, 0.35);
 }
 
 .map.is-fullscreen {
@@ -22,7 +22,7 @@
 
 .leaflet-control-zoom a {
   border-radius: 12px !important;
-  box-shadow: 0 10px 20px -16px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 10px 20px -16px rgba(16, 44, 65, 0.4);
 }
 
 .cws-fullscreen-control {
@@ -62,17 +62,17 @@
   gap: 2px;
   padding: 8px 12px;
   border-radius: 18px;
-  background: color-mix(in srgb, var(--cws-primary) 22%, rgba(15, 23, 42, 0.75));
+  background: color-mix(in srgb, var(--cws-primary) 22%, rgba(16, 44, 65, 0.75));
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 18px 32px -24px rgba(15, 23, 42, 0.55);
+  box-shadow: 0 18px 32px -24px rgba(16, 44, 65, 0.55);
   text-align: center;
   min-width: 108px;
 }
 
 .marker-chip.fav {
   background: linear-gradient(135deg, var(--cws-primary) 0%, var(--cws-accent) 100%);
-  box-shadow: 0 24px 40px -24px rgba(14, 165, 233, 0.55);
+  box-shadow: 0 24px 40px -24px rgba(128, 192, 237, 0.55);
 }
 
 .marker-temp {
