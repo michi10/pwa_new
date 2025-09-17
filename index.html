@@ -27,15 +27,16 @@
   <div id="splash" aria-live="polite" class="splash visible" data-i18n-aria-label="loading">
     <img src="assets/icon-192.png" alt="CWS Logo" width="128" height="128" />
     <p id="splashText" data-i18n="splashLoading">App wird geladen…</p>
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="progress">
-      <div class="bar" id="progressBar" style="width:0%"></div>
-    </div>
+    <div class="spinner" id="progressSpinner" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="progress"></div>
   </div>
 
   <!-- App-Header -->
   <header id="appHeader" class="app-header" data-i18n-aria-label="header">
     <h1 class="brand">CWS</h1>
-    <div class="title" id="pageTitle" data-i18n="titleDashboard">Dashboard</div>
+    <div class="title-stack">
+      <div class="title" id="pageTitle" data-i18n="titleDashboard">Dashboard</div>
+      <div class="personal-badge" id="personalBadge" hidden></div>
+    </div>
     <button id="btnSettings" class="icon-btn" data-i18n-aria-label="openSettings">
       <i class="fa-solid fa-gear"></i>
     </button>
@@ -43,6 +44,20 @@
 
   <!-- Hauptinhalt -->
   <main id="app" class="app" role="main" aria-live="polite"></main>
+
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-copy">
+        <h2 class="footer-tagline" data-i18n="footerMotto">Gemeinsam durch jede Wetterlage.</h2>
+        <p class="footer-greeting" id="footerGreeting" data-i18n="footerGreetingDefault">Bleib neugierig auf den Himmel über dir.</p>
+      </div>
+      <div class="footer-actions">
+        <button class="footer-btn" data-legal="privacy" data-i18n="footerPrivacy">Datenschutz</button>
+        <button class="footer-btn" data-legal="imprint" data-i18n="footerImprint">Impressum</button>
+        <button class="footer-btn" data-legal="terms" data-i18n="footerTerms">Nutzungsbedingungen</button>
+      </div>
+    </div>
+  </footer>
 
   <!-- Bottom Nav -->
   <nav id="nav" class="nav" role="tablist" data-i18n-aria-label="navigation">
@@ -104,6 +119,29 @@
         </fieldset>
 
         <fieldset class="group">
+          <legend data-i18n="generalSettings">Allgemein</legend>
+          <label class="row">
+            <input type="checkbox" id="notifyToggle" />
+            <span data-i18n="notifications">Benachrichtigungen zu Wetterereignissen</span>
+          </label>
+          <label class="row">
+            <input type="checkbox" id="autoRefreshToggle" />
+            <span data-i18n="autoRefresh">Daten automatisch aktualisieren</span>
+          </label>
+          <label class="row">
+            <span data-i18n="measurementUnits">Einheiten</span>
+            <select id="units">
+              <option value="metric" data-i18n="unitsMetric">Metrisch (°C, km/h)</option>
+              <option value="imperial" data-i18n="unitsImperial">Imperial (°F, mph)</option>
+            </select>
+          </label>
+          <label class="row">
+            <span data-i18n="favoriteStation">Lieblingsstation</span>
+            <select id="favoriteStation"></select>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
           <legend data-i18n="dataSource">Datenquelle</legend>
           <p class="hint" data-i18n="dataHint">Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.</p>
         </fieldset>
@@ -111,6 +149,45 @@
 
       <footer class="card-foot">
         <button class="btn primary" id="saveSettings" value="default" data-i18n="save">Speichern</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="legalDialog" class="modal legal-modal" aria-modal="true">
+    <form method="dialog" class="card">
+      <header class="card-head">
+        <h2 id="legalTitle">Rechtliches</h2>
+        <button class="icon-btn" value="cancel" data-i18n-aria-label="close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+      <div class="card-body legal-body" id="legalContent"></div>
+      <footer class="card-foot">
+        <button class="btn primary" value="default" data-i18n="close">Schließen</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="accessGate" class="modal gate-modal" aria-modal="true" data-i18n-aria-label="accessTitle">
+    <form method="dialog" class="card">
+      <header class="card-head">
+        <h2 data-i18n="accessTitle">Zugangscode</h2>
+        <button class="icon-btn" value="cancel" data-i18n-aria-label="close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </header>
+      <div class="card-body gate-body">
+        <p data-i18n="accessDescription">Bitte gib deinen persönlichen Zugangscode ein. Jeder Code kann nur drei Mal aktiviert werden.</p>
+        <label class="gate-label">
+          <span data-i18n="accessCodeLabel">Code</span>
+          <input type="text" id="accessCode" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" data-i18n-placeholder="accessCodePlaceholder" placeholder="123456" />
+        </label>
+        <p class="hint" id="accessHint" data-i18n="accessHint">Kontaktier uns, falls dein Code bereits verwendet wurde.</p>
+        <p class="gate-error" id="accessError" role="alert"></p>
+      </div>
+      <footer class="card-foot gate-foot">
+        <button class="btn" value="cancel" data-i18n="close">Schließen</button>
+        <button class="btn primary" id="submitCode" value="default" data-i18n="accessConfirm">Freischalten</button>
       </footer>
     </form>
   </dialog>

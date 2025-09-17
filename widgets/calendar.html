@@ -1,7 +1,34 @@
 <link rel="stylesheet" href="widgets/calendar.css" />
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
-<section class="widget-12 widget-host">
-  <div id="calendar"></div>
+<section class="widget-12 widget-card calendar-card">
+  <div class="calendar-head">
+    <div>
+      <h3 data-i18n="titleCalendar">Kalender</h3>
+      <p class="calendar-sub" data-i18n="calendarIntro">Wähle Messwert und Statistik, um den Monat zu analysieren.</p>
+    </div>
+    <div class="calendar-controls">
+      <label>
+        <span data-i18n="calendarMetric">Messwert</span>
+        <select id="calendarMetric">
+          <option value="temperature" data-i18n="temperature">Temperatur</option>
+          <option value="rain" data-i18n="rain">Niederschlag</option>
+          <option value="wind" data-i18n="wind">Wind</option>
+          <option value="humidity" data-i18n="humidity">Luftfeuchte</option>
+        </select>
+      </label>
+      <label>
+        <span data-i18n="calendarStatistic">Auswertung</span>
+        <select id="calendarStatistic">
+          <option value="min" data-i18n="statMin">Minimum</option>
+          <option value="avg" data-i18n="statAvg">Durchschnitt</option>
+          <option value="max" data-i18n="statMax">Maximum</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="calendar-body">
+    <div id="calendar"></div>
+  </div>
 </section>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 <script defer src="widgets/calendar.js"></script>
