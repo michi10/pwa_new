@@ -23,6 +23,7 @@
 </head>
 
 <body>
+ codex/add-multiple-app-features-and-improvements
   <!-- Splash (leicht animiert, barrierearm) -->
   <div id="splash" aria-live="polite" class="splash visible" data-i18n-aria-label="loading">
     <img src="assets/icon-192.png" alt="CWS Logo" width="128" height="128" />
@@ -41,6 +42,25 @@
       <i class="fa-solid fa-gear"></i>
     </button>
   </header>
+
+  <!-- Splash (leicht animiert, barrierearm) -->
+  <div id="splash" aria-live="polite" class="splash visible" data-i18n-aria-label="loading">
+    <img src="assets/icon-192.png" alt="CWS Logo" width="128" height="128" />
+    <p id="splashText" data-i18n="splashLoading">App wird geladen…</p>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="progress">
+      <div class="bar" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- App-Header -->
+  <header id="appHeader" class="app-header" data-i18n-aria-label="header">
+    <h1 class="brand">CWS</h1>
+    <div class="title" id="pageTitle" data-i18n="titleDashboard">Dashboardig</div>
+    <button id="btnSettings" class="icon-btn" data-i18n-aria-label="openSettings">
+      <i class="fa-solid fa-gear"></i>
+    </button>
+  </header>
+ main
 
   <!-- Hauptinhalt -->
   <main id="app" class="app" role="main" aria-live="polite"></main>
@@ -86,6 +106,7 @@
       </header>
 
       <div class="card-body">
+ codex/add-multiple-app-features-and-improvements
         <fieldset class="group">
           <legend data-i18n="appearance">Darstellung</legend>
           <label class="row">
@@ -197,3 +218,55 @@
   <script src="app.js"></script>
 </body>
 </html>
+
+        <fieldset class="group">
+          <legend data-i18n="appearance">Darstellung</legend>
+          <label class="row">
+            <input type="checkbox" id="darkToggle" />
+            <span data-i18n="darkMode">Dark Mode aktivieren</span>
+          </label>
+          <label class="row">
+            <input type="checkbox" id="reduceMotion" />
+            <span data-i18n="reduceMotion">Animationen reduzieren</span>
+          </label>
+          <label class="row">
+            <input type="checkbox" id="highContrast" />
+            <span data-i18n="highContrast">Hohen Kontrast (AAA) aktivieren</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend data-i18n="personalization">Personalisierung</legend>
+          <div class="row">
+            <input id="firstName" data-i18n-placeholder="firstName" placeholder="Vorname" autocomplete="given-name" aria-label="Vorname" data-i18n-aria-label="firstName" />
+            <input id="lastName" data-i18n-placeholder="lastName" placeholder="Nachname" autocomplete="family-name" aria-label="Nachname" data-i18n-aria-label="lastName" />
+          </div>
+          <p class="hint" data-i18n="nameHint">Dein Name erscheint an mehreren Stellen (z. B. „Guten Morgen, Michael“).</p>
+          <label class="row">
+            <span data-i18n="language">Sprache</span>
+            <select id="language">
+              <option value="de">Deutsch</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend data-i18n="dataSource">Datenquelle</legend>
+          <p class="hint" data-i18n="dataHint">Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.</p>
+        </fieldset>
+      </div>
+
+      <footer class="card-foot">
+        <button class="btn primary" id="saveSettings" value="default" data-i18n="save">Speichern</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Daten & App -->
+  <script src="data/demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
