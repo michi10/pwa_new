@@ -691,7 +691,11 @@ if ('serviceWorker' in navigator) {
   broadcastPrefs(true);
   applyPersonalization();
 
-  await gateAccess();
+  hideSplash();
+  const accessGranted = await gateAccess();
+  if (!accessGranted) return;
+
+  showSplash(12);
   firstRun();
   await mount('dashboard');
 })();
