@@ -310,6 +310,14 @@ const translations = {
   }
 };
 
+const reduceMotionQuery = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+  ? window.matchMedia('(prefers-reduced-motion: reduce)')
+  : { matches: false };
+
+function shouldReduceMotion(){
+  return document.documentElement.classList.contains('reduce') || !!reduceMotionQuery.matches;
+}
+
 window.CWS = window.CWS || {};
 
 const legalTexts = {
@@ -382,14 +390,55 @@ window.t = t;
 /* ---------------- Splash ---------------- */
 const splash = document.getElementById('splash');
 const spinner = document.getElementById('progressSpinner');
+let spinnerProgress = 0;
+let spinnerTarget = 0;
+let spinnerFrame = null;
+
+function applySpinnerProgress(value){
+  if (!spinner) return;
+  spinner.style.setProperty('--angle', `${value * 3.6}deg`);
+  spinner.setAttribute('aria-valuenow', String(Math.round(value)));
+}
+
+function stepSpinner(){
+  spinnerFrame = null;
+  if (!spinner) return;
+  if (shouldReduceMotion()) {
+    spinnerProgress = spinnerTarget;
+    applySpinnerProgress(spinnerProgress);
+    return;
+  }
+  const diff = spinnerTarget - spinnerProgress;
+  if (Math.abs(diff) <= 0.1) {
+    spinnerProgress = spinnerTarget;
+    applySpinnerProgress(spinnerProgress);
+    return;
+  }
+  spinnerProgress += diff * 0.18;
+  if (Math.abs(spinnerTarget - spinnerProgress) <= 0.05) {
+    spinnerProgress = spinnerTarget;
+  }
+  applySpinnerProgress(spinnerProgress);
+  scheduleSpinnerStep();
+}
+
+function scheduleSpinnerStep(){
+  if (spinnerFrame != null) return;
+  spinnerFrame = requestAnimationFrame(stepSpinner);
+}
 function clampProgress(to){
   return Math.max(0, Math.min(100, Number.isFinite(to) ? Number(to) : 0));
 }
 function setSpinner(to){
   if (!spinner) return;
   const safe = clampProgress(to);
-  spinner.style.setProperty('--angle', `${safe * 3.6}deg`);
-  spinner.setAttribute('aria-valuenow', String(Math.round(safe)));
+  spinnerTarget = safe;
+  if (shouldReduceMotion()) {
+    spinnerProgress = spinnerTarget;
+    applySpinnerProgress(spinnerProgress);
+    return;
+  }
+  scheduleSpinnerStep();
 }
 function showSplash(to=10){
   splash?.classList.add('visible');
@@ -402,6 +451,65 @@ function hideSplash(){
   splash?.classList.remove('visible');
   setSpinner(0);
 }
+
+/* ---------------- Modal Sheets ---------------- */
+const SHEET_CLOSE_ANIMATION = 'modalSheetOut';
+
+function enhanceSheetDialog(dialog){
+  if (!(dialog instanceof HTMLDialogElement) || dialog.dataset.sheetified === 'true') return;
+  const card = dialog.querySelector('.card');
+  if (!card) return;
+  dialog.dataset.sheetified = 'true';
+  const nativeClose = dialog.close.bind(dialog);
+
+  const requestClose = (value) => {
+    if (!dialog.open) {
+      if (value != null) dialog.returnValue = value;
+      return;
+    }
+    let settled = false;
+    const finish = (val) => {
+      if (settled) return;
+      settled = true;
+      dialog.classList.remove('closing');
+      nativeClose(val);
+    };
+    if (shouldReduceMotion()) {
+      finish(value);
+      return;
+    }
+    if (dialog.classList.contains('closing')) return;
+    dialog.classList.add('closing');
+    const fallback = setTimeout(() => finish(value), 360);
+    const handle = (event) => {
+      if (event.target === card && event.animationName === SHEET_CLOSE_ANIMATION) {
+        clearTimeout(fallback);
+        finish(value);
+      }
+    };
+    card.addEventListener('animationend', handle, { once: true });
+  };
+
+  dialog.close = requestClose;
+
+  dialog.addEventListener('cancel', (ev) => {
+    ev.preventDefault();
+    requestClose();
+  });
+
+  dialog.addEventListener('click', (ev) => {
+    if (ev.target === dialog) {
+      ev.preventDefault();
+      requestClose();
+    }
+  });
+
+  dialog.addEventListener('close', () => {
+    dialog.classList.remove('closing');
+  });
+}
+
+document.querySelectorAll('dialog.modal').forEach(enhanceSheetDialog);
 
 /* ---------------- Helpers ---------------- */
 const $ = (sel, root=document) => root.querySelector(sel);
