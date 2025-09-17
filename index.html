@@ -24,19 +24,19 @@
 
 <body>
   <!-- Splash (leicht animiert, barrierearm) -->
-  <div id="splash" aria-live="polite" aria-label="Ladevorgang" class="splash visible">
+  <div id="splash" aria-live="polite" class="splash visible" data-i18n-aria-label="loading">
     <img src="assets/icon-192.png" alt="CWS Logo" width="128" height="128" />
-    <p id="splashText">App wird geladen…</p>
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Fortschritt">
+    <p id="splashText" data-i18n="splashLoading">App wird geladen…</p>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-i18n-aria-label="progress">
       <div class="bar" id="progressBar" style="width:0%"></div>
     </div>
   </div>
 
   <!-- App-Header -->
-  <header id="appHeader" class="app-header" aria-label="Kopfzeile">
+  <header id="appHeader" class="app-header" data-i18n-aria-label="header">
     <h1 class="brand">CWS</h1>
-    <div class="title" id="pageTitle">Dashboard</div>
-    <button id="btnSettings" class="icon-btn" aria-label="Einstellungen öffnen">
+    <div class="title" id="pageTitle" data-i18n="titleDashboard">Dashboard</div>
+    <button id="btnSettings" class="icon-btn" data-i18n-aria-label="openSettings">
       <i class="fa-solid fa-gear"></i>
     </button>
   </header>
@@ -45,65 +45,72 @@
   <main id="app" class="app" role="main" aria-live="polite"></main>
 
   <!-- Bottom Nav -->
-  <nav id="nav" class="nav" role="tablist" aria-label="Navigation">
-    <button class="nav-btn active" data-route="dashboard" role="tab" aria-selected="true" aria-label="Startseite">
-      <i class="fa-solid fa-house"></i><span>Home</span>
+  <nav id="nav" class="nav" role="tablist" data-i18n-aria-label="navigation">
+    <button class="nav-btn active" data-route="dashboard" role="tab" aria-selected="true" data-i18n-aria-label="navHome">
+      <i class="fa-solid fa-house"></i><span data-i18n="navHome">Home</span>
     </button>
-    <button class="nav-btn" data-route="map" role="tab" aria-selected="false" aria-label="Karte">
-      <i class="fa-solid fa-map"></i><span>Karte</span>
+    <button class="nav-btn" data-route="map" role="tab" aria-selected="false" data-i18n-aria-label="navMap">
+      <i class="fa-solid fa-map"></i><span data-i18n="navMap">Karte</span>
     </button>
-    <button class="nav-btn" data-route="calendar" role="tab" aria-selected="false" aria-label="Kalender">
-      <i class="fa-solid fa-calendar"></i><span>Kalender</span>
+    <button class="nav-btn" data-route="calendar" role="tab" aria-selected="false" data-i18n-aria-label="navCalendar">
+      <i class="fa-solid fa-calendar"></i><span data-i18n="navCalendar">Kalender</span>
     </button>
-    <button class="nav-btn" data-route="rain" role="tab" aria-selected="false" aria-label="Niederschlag">
-      <i class="fa-solid fa-cloud-rain"></i><span>Regen</span>
+    <button class="nav-btn" data-route="rain" role="tab" aria-selected="false" data-i18n-aria-label="navRain">
+      <i class="fa-solid fa-cloud-rain"></i><span data-i18n="navRain">Regen</span>
     </button>
   </nav>
 
   <!-- Settings-Dialog (AA/AAA-konform) -->
-  <dialog id="settings" class="modal" aria-modal="true" aria-label="Einstellungen">
+  <dialog id="settings" class="modal" aria-modal="true" data-i18n-aria-label="settings">
     <form method="dialog" class="card">
       <header class="card-head">
-        <h2>Einstellungen</h2>
-        <button class="icon-btn" value="cancel" aria-label="Schließen">
+        <h2 data-i18n="settings">Einstellungen</h2>
+        <button class="icon-btn" value="cancel" data-i18n-aria-label="close">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </header>
 
       <div class="card-body">
         <fieldset class="group">
-          <legend>Darstellung</legend>
+          <legend data-i18n="appearance">Darstellung</legend>
           <label class="row">
             <input type="checkbox" id="darkToggle" />
-            <span>Dark Mode aktivieren</span>
+            <span data-i18n="darkMode">Dark Mode aktivieren</span>
           </label>
           <label class="row">
             <input type="checkbox" id="reduceMotion" />
-            <span>Animationen reduzieren</span>
+            <span data-i18n="reduceMotion">Animationen reduzieren</span>
           </label>
           <label class="row">
             <input type="checkbox" id="highContrast" />
-            <span>Hohen Kontrast (AAA) aktivieren</span>
+            <span data-i18n="highContrast">Hohen Kontrast (AAA) aktivieren</span>
           </label>
         </fieldset>
 
         <fieldset class="group">
-          <legend>Personalisierung</legend>
+          <legend data-i18n="personalization">Personalisierung</legend>
           <div class="row">
-            <input id="firstName" placeholder="Vorname" autocomplete="given-name" aria-label="Vorname" />
-            <input id="lastName" placeholder="Nachname" autocomplete="family-name" aria-label="Nachname" />
+            <input id="firstName" data-i18n-placeholder="firstName" placeholder="Vorname" autocomplete="given-name" aria-label="Vorname" data-i18n-aria-label="firstName" />
+            <input id="lastName" data-i18n-placeholder="lastName" placeholder="Nachname" autocomplete="family-name" aria-label="Nachname" data-i18n-aria-label="lastName" />
           </div>
-          <p class="hint">Dein Name erscheint an mehreren Stellen (z. B. „Guten Morgen, Michael“).</p>
+          <p class="hint" data-i18n="nameHint">Dein Name erscheint an mehreren Stellen (z. B. „Guten Morgen, Michael“).</p>
+          <label class="row">
+            <span data-i18n="language">Sprache</span>
+            <select id="language">
+              <option value="de">Deutsch</option>
+              <option value="en">English</option>
+            </select>
+          </label>
         </fieldset>
 
         <fieldset class="group">
-          <legend>Datenquelle</legend>
-          <p class="hint">Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.</p>
+          <legend data-i18n="dataSource">Datenquelle</legend>
+          <p class="hint" data-i18n="dataHint">Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.</p>
         </fieldset>
       </div>
 
       <footer class="card-foot">
-        <button class="btn primary" id="saveSettings" value="default">Speichern</button>
+        <button class="btn primary" id="saveSettings" value="default" data-i18n="save">Speichern</button>
       </footer>
     </form>
   </dialog>

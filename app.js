@@ -4,18 +4,156 @@
    - Widgets werden on-demand geladen (Shadow DOM), Demodaten via data/demo.js
    ============================================================================ */
 
-const routes = {
-  dashboard: { title: 'Dashboard', file: 'widgets/dashboard.html' },
-  map:       { title: 'Karte',     file: 'widgets/map.html' },
-  calendar:  { title: 'Kalender',  file: 'widgets/calendar.html' },
-  rain:      { title: 'Niederschlag', file: 'widgets/rain.html' }
-};
-
 const state = {
   user: { firstName: '', lastName: '' },
   ui:   { dark: false, reduceMotion: false, highContrast: false },
-  route: 'dashboard'
+  route: 'dashboard',
+  lang: 'de'
 };
+
+const routes = {
+  dashboard: { titleKey: 'titleDashboard', file: 'widgets/dashboard.html' },
+  map:       { titleKey: 'titleMap',       file: 'widgets/map.html' },
+  calendar:  { titleKey: 'titleCalendar',  file: 'widgets/calendar.html' },
+  rain:      { titleKey: 'titleRain',      file: 'widgets/rain.html' }
+};
+
+const translations = {
+  de: {
+    splashLoading: 'App wird geladen…',
+    loading: 'Ladevorgang',
+    progress: 'Fortschritt',
+    titleDashboard: 'Dashboard',
+    titleMap: 'Karte',
+    titleCalendar: 'Kalender',
+    titleRain: 'Niederschlag',
+    navHome: 'Home',
+    navMap: 'Karte',
+    navCalendar: 'Kalender',
+    navRain: 'Regen',
+    settings: 'Einstellungen',
+    close: 'Schließen',
+    appearance: 'Darstellung',
+    darkMode: 'Dark Mode aktivieren',
+    reduceMotion: 'Animationen reduzieren',
+    highContrast: 'Hohen Kontrast (AAA) aktivieren',
+    personalization: 'Personalisierung',
+    firstName: 'Vorname',
+    lastName: 'Nachname',
+    nameHint: 'Dein Name erscheint an mehreren Stellen (z. B. „Guten Morgen, Michael“).',
+    language: 'Sprache',
+    dataSource: 'Datenquelle',
+    dataHint: 'Aktuell werden Demodaten verwendet. Später wird hier ThingsBoard verbunden.',
+    save: 'Speichern',
+    openSettings: 'Einstellungen öffnen',
+    navigation: 'Navigation',
+    header: 'Kopfzeile',
+    settingsSaved: 'Danke, {name}! Einstellungen gespeichert.',
+    friend: 'Freund',
+    loadError: 'Fehler beim Laden',
+    hello: 'Hallo!',
+    helloName: 'Hallo {name}!',
+    demoSub: 'Demodaten – ThingsBoard Anbindung folgt.',
+    temperature: 'Temperatur',
+    rain: 'Niederschlag',
+    wind: 'Wind',
+    humidity: 'Luftfeuchte',
+    current: 'Aktuell',
+    minToday: 'Min heute',
+    maxToday: 'Max heute',
+    today: 'Heute',
+    lastHour: 'Letzte Stunde',
+    sum24h: '24 h Summe',
+    average: 'Ø',
+    gust: 'Böe',
+    direction: 'Richtung',
+    highShort: 'H',
+    lowShort: 'T',
+    rainOverview: 'Niederschlags-Übersicht',
+    range24h: '24 h',
+    range48h: '48 h',
+    range7d: '7 Tage',
+    range30d: '30 Tage',
+    inPeriod: 'im Zeitraum',
+    evtMaintNussdorf: 'Wartung Station Nussdorf',
+    evtSensorWaidach: 'Sensorwechsel Waidach',
+    evtStorm: 'Sturm – erhöhte Böen',
+    evtSoftwareUpdate: 'Softwareupdate'
+  },
+  en: {
+    splashLoading: 'Loading app…',
+    loading: 'Loading',
+    progress: 'Progress',
+    titleDashboard: 'Dashboard',
+    titleMap: 'Map',
+    titleCalendar: 'Calendar',
+    titleRain: 'Rain',
+    navHome: 'Home',
+    navMap: 'Map',
+    navCalendar: 'Calendar',
+    navRain: 'Rain',
+    settings: 'Settings',
+    close: 'Close',
+    appearance: 'Appearance',
+    darkMode: 'Enable dark mode',
+    reduceMotion: 'Reduce motion',
+    highContrast: 'Enable high contrast (AAA)',
+    personalization: 'Personalization',
+    firstName: 'First name',
+    lastName: 'Last name',
+    nameHint: 'Your name appears in several places (e.g., “Good morning, Michael”).',
+    language: 'Language',
+    dataSource: 'Data source',
+    dataHint: 'Currently demo data is used. Later, ThingsBoard will be connected here.',
+    save: 'Save',
+    openSettings: 'Open settings',
+    navigation: 'Navigation',
+    header: 'Header',
+    settingsSaved: 'Thanks, {name}! Settings saved.',
+    friend: 'friend',
+    loadError: 'Error loading',
+    hello: 'Hello!',
+    helloName: 'Hello {name}!',
+    demoSub: 'Demo data – ThingsBoard integration coming soon.',
+    temperature: 'Temperature',
+    rain: 'Rain',
+    wind: 'Wind',
+    humidity: 'Humidity',
+    current: 'Current',
+    minToday: 'Min today',
+    maxToday: 'Max today',
+    today: 'Today',
+    lastHour: 'Last hour',
+    sum24h: '24 h total',
+    average: 'Avg',
+    gust: 'Gust',
+    direction: 'Direction',
+    highShort: 'H',
+    lowShort: 'L',
+    rainOverview: 'Rainfall overview',
+    range24h: '24 h',
+    range48h: '48 h',
+    range7d: '7 days',
+    range30d: '30 days',
+    inPeriod: 'during period',
+    evtMaintNussdorf: 'Maintenance Nussdorf station',
+    evtSensorWaidach: 'Sensor replacement Waidach',
+    evtStorm: 'Storm – increased gusts',
+    evtSoftwareUpdate: 'Software update'
+  }
+};
+
+function t(key){
+  return (translations[state.lang] || {})[key] || key;
+}
+
+function translate(root=document){
+  $$('[data-i18n]', root).forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  $$('[data-i18n-placeholder]', root).forEach(el=>{ el.setAttribute('placeholder', t(el.dataset.i18nPlaceholder)); });
+  $$('[data-i18n-aria-label]', root).forEach(el=>{ el.setAttribute('aria-label', t(el.dataset.i18nAriaLabel)); });
+}
+
+window.t = t;
 
 /* ---------------- Splash ---------------- */
 const splash = document.getElementById('splash');
@@ -40,6 +178,7 @@ $('#btnSettings').addEventListener('click', () => {
   $('#darkToggle').checked = state.ui.dark;
   $('#reduceMotion').checked = state.ui.reduceMotion;
   $('#highContrast').checked = state.ui.highContrast;
+  $('#language').value     = state.lang;
   dlg.showModal();
 });
 
@@ -50,13 +189,20 @@ $('#saveSettings').addEventListener('click', (e) => {
   state.ui.dark        = $('#darkToggle').checked;
   state.ui.reduceMotion= $('#reduceMotion').checked;
   state.ui.highContrast= $('#highContrast').checked;
+  const prevLang       = state.lang;
+  state.lang           = $('#language').value;
 
   save('cws_user', state.user);
   save('cws_ui', state.ui);
+  save('cws_lang', state.lang);
   applyUiPrefs();
+  translate();
+  document.documentElement.lang = state.lang;
+  title(t(routes[state.route].titleKey));
   dlg.close();
+  if (state.lang !== prevLang) mount(state.route);
   // freundlicher Toast
-  toast(`Danke, ${state.user.firstName || 'Freund'}! Einstellungen gespeichert.`);
+  toast(t('settingsSaved').replace('{name}', state.user.firstName || t('friend')));
 });
 
 /* ---------------- UI Prefs ---------------- */
@@ -84,7 +230,7 @@ async function mount(route){
     b.setAttribute('aria-selected', String(on));
   });
 
-  title(r.title);
+  title(t(r.titleKey));
 
   try {
     const html = await loadWidgetHtml(r.file);
@@ -94,6 +240,7 @@ async function mount(route){
     host.innerHTML = html; // enthält eigene CSS/JS Includes
     $('#app').innerHTML = '';
     $('#app').appendChild(host);
+    translate(host);
     setProgress(70);
 
     // Personalisierung in Widgets verfügbar machen
@@ -104,7 +251,7 @@ async function mount(route){
     setProgress(100);
   } catch (e) {
     console.error(e);
-    $('#app').innerHTML = `<div class="widget-card" style="padding:16px">Fehler beim Laden: ${e.message}</div>`;
+    $('#app').innerHTML = `<div class="widget-card" style="padding:16px">${t('loadError')}: ${e.message}</div>`;
   } finally {
     hideSplash();
   }
@@ -145,7 +292,10 @@ if ('serviceWorker' in navigator) {
   // Load prefs
   state.user = load('cws_user', state.user);
   state.ui   = load('cws_ui', state.ui);
+  state.lang = load('cws_lang', state.lang);
+  document.documentElement.lang = state.lang;
   applyUiPrefs();
+  translate();
 
   firstRun();
   await mount('dashboard'); // Startseite

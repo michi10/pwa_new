@@ -12,7 +12,8 @@
   document.addEventListener('cws:user', (e)=>{
     const { firstName } = e.detail || {};
     const hello = document.getElementById('helloText');
-    if (firstName) hello.textContent = `Hallo ${firstName}!`;
+    if (firstName) hello.textContent = t('helloName').replace('{name}', firstName);
+    else hello.textContent = t('hello');
   });
 
   // NOW
@@ -20,8 +21,8 @@
   const hiT  = max(temps);
   const loT  = min(temps);
   document.getElementById('nowDeg').textContent = `${nowT.toFixed(1)}°`;
-  document.getElementById('nowHi').textContent  = `H ${hiT.toFixed(1)}°`;
-  document.getElementById('nowLo').textContent  = `T ${loT.toFixed(1)}°`;
+  document.getElementById('nowHi').textContent  = `${t('highShort')} ${hiT.toFixed(1)}°`;
+  document.getElementById('nowLo').textContent  = `${t('lowShort')} ${loT.toFixed(1)}°`;
 
   // KPIs
   $('#tempNow').textContent = `${nowT.toFixed(1)} °C`;
