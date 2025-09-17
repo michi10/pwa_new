@@ -42,13 +42,21 @@
 }
 
 .calendar-body {
-  border: 1px solid color-mix(in srgb, var(--cws-border) 70%, transparent);
-  border-radius: var(--radius);
-  overflow: hidden;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--cws-surface-solid) 95%, transparent);
+  box-shadow: 0 26px 48px -36px rgba(16, 44, 65, 0.38);
+  padding: clamp(12px, 3vw, 20px);
+  overflow: visible;
 }
 
 #calendar {
-  padding: 6px;
+  --fc-border-color: transparent;
+  padding: clamp(6px, 2vw, 14px);
+}
+
+#calendar .fc-view-harness {
+  overflow: visible !important;
 }
 
 .fc-toolbar.fc-header-toolbar {
@@ -86,14 +94,45 @@
 
 .fc-theme-standard .fc-scrollgrid {
   border: none;
+  background: transparent;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: none;
+}
+
+#calendar .fc-scrollgrid-sync-table {
+  border-collapse: separate !important;
+  border-spacing: clamp(10px, 1.8vw, 16px) clamp(12px, 2vh, 18px);
 }
 
 .fc .fc-daygrid-day {
-  border: 1px solid color-mix(in srgb, var(--cws-border) 70%, transparent);
+  border: none;
+  padding: clamp(4px, 1.4vw, 10px);
 }
 
-.fc .fc-daygrid-day.fc-day-today {
-  background: var(--cws-primary-soft);
+.fc .fc-daygrid-day-frame {
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--cws-border) 45%, transparent);
+  background: color-mix(in srgb, var(--cws-surface) 96%, transparent);
+  box-shadow: 0 18px 36px -28px rgba(16, 44, 65, 0.25);
+  padding: clamp(10px, 2.4vw, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: clamp(96px, 16vw, 128px);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.fc .fc-daygrid-day:hover .fc-daygrid-day-frame {
+  box-shadow: 0 24px 44px -28px rgba(16, 44, 65, 0.3);
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-frame {
+  border-color: color-mix(in srgb, var(--cws-primary) 55%, transparent);
+  background: color-mix(in srgb, var(--cws-primary-soft) 75%, var(--cws-surface));
+  box-shadow: 0 24px 48px -26px rgba(35, 128, 207, 0.35);
 }
 
 .fc .fc-daygrid-day-number {
@@ -101,22 +140,37 @@
   font-weight: 600;
 }
 
+.fc .fc-daygrid-day-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.fc .fc-daygrid-day-events {
+  display: grid;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .fc-daygrid-event {
   border: none !important;
   background: transparent !important;
-  padding: 2px 6px !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .calendar-pill {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--cws-primary) 18%, rgba(255, 255, 255, 0.2));
+  background: color-mix(in srgb, var(--cws-primary) 18%, rgba(255, 255, 255, 0.4));
   color: var(--cws-primary-strong);
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 680px) {
