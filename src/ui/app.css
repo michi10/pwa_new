@@ -1,0 +1,134 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cws-bg);
+}
+
+.top-bar {
+  height: calc(66px + var(--safe-top));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--safe-top) var(--spacing-lg) 0;
+  background: linear-gradient(90deg, var(--cws-primary-dark), var(--cws-primary));
+  color: #ffffff;
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-bar .icon-button svg {
+  width: 28px;
+  height: 28px;
+}
+
+.home-button {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.home-button.active {
+  color: #ffffff;
+}
+
+.reload-button {
+  color: #ffffff;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.brand-title {
+  font-size: 1.1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.brand-title span {
+  color: var(--cws-accent);
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  font-size: 0.85rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.station-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 4px 12px;
+}
+
+.station-select label {
+  font-size: 0.9rem;
+}
+
+.station-select select {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 1rem;
+  min-width: 180px;
+}
+
+.station-select option {
+  color: var(--cws-text);
+}
+
+.main-content {
+  flex: 1;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.page-view {
+  display: none;
+}
+
+.page-view.active {
+  display: block;
+}
+
+.bottom-nav {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  background: var(--cws-primary);
+  color: rgba(255, 255, 255, 0.75);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: space-around;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  box-shadow: 0 -12px 32px rgba(15, 23, 42, 0.18);
+}
+
+.bottom-nav button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.bottom-nav button[aria-current="page"] {
+  color: #ffffff;
+}
+
+.offline-banner {
+  margin: var(--spacing-sm) var(--spacing-lg) 0;
+}

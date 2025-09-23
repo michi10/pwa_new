@@ -1,0 +1,5 @@
+[
+  { "stationId": "eisping-2", "amount": 12.5, "period": "day", "updatedAt": 1719979200000 },
+  { "stationId": "nussdorf-1", "amount": 6.4, "period": "day", "updatedAt": 1719979200000 },
+  { "stationId": "seidnitz-3", "amount": 3.2, "period": "day", "updatedAt": 1719979200000 }
+]
