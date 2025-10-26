@@ -1,0 +1,30 @@
+:root {
+  --cws-bg: #DFE7EC;
+  --cws-primary: #10658E;
+  --cws-primary-dark: #144A66;
+  --cws-accent: #f1bd0e;
+  --cws-text: #0f172a;
+  --cws-muted: #6b7280;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --shadow-soft: 0 8px 20px rgba(20, 74, 102, 0.12);
+  --shadow-card: 0 12px 32px rgba(16, 101, 142, 0.16);
+  --font-sans: system-ui, -apple-system, "SF Pro Text", "Roboto", "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --transition-fast: 140ms ease;
+  --transition-slow: 240ms ease;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-slow: 0ms;
+  }
+}

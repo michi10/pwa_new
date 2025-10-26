@@ -1,0 +1,13 @@
+{
+  "name": "connected Wetterstationen™",
+  "short_name": "CWS",
+  "id": "connected-wetterstationen",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#DFE7EC",
+  "theme_color": "#10658E",
+  "description": "Verlässliche Wetterdaten der connected Wetterstationen™ auch offline abrufbar.",
+  "lang": "de-AT",
+  "icons": []
+}

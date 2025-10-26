@@ -1,0 +1,13 @@
+{
+  "tbBaseUrl": "https://thingsboard.example.com",
+  "tbToken": "",
+  "telemetryKeys": {
+    "temperature": ["temperature"],
+    "humidity": ["humidity"],
+    "wind": ["windSpeed"],
+    "uv": ["uvIndex"],
+    "rain": ["rain"],
+    "dailyRain": ["rainDaily"],
+    "monthlyRain": ["rainMonthly"]
+  }
+}

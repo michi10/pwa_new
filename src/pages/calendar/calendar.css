@@ -1,0 +1,83 @@
+.calendar-page {
+  padding: calc(var(--spacing-lg) + var(--safe-top)) var(--spacing-lg) var(--spacing-lg);
+}
+
+.calendar-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.calendar-toggle {
+  display: inline-flex;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.calendar-toggle button {
+  border: none;
+  background: transparent;
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: var(--cws-muted);
+}
+
+.calendar-toggle button[aria-pressed="true"] {
+  background: var(--cws-primary);
+  color: #ffffff;
+}
+
+.calendar-nav {
+  display: inline-flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.calendar-nav button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--cws-primary);
+  color: #ffffff;
+}
+
+.calendar-list {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.calendar-card {
+  background: #ffffff;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.calendar-card strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--cws-primary-dark);
+}
+
+.calendar-empty {
+  background: rgba(16, 101, 142, 0.08);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--cws-primary-dark);
+}
+
+.calendar-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl) 0;
+}

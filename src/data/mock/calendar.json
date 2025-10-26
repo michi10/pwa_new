@@ -1,0 +1,8 @@
+[
+  { "stationId": "nussdorf-1", "dateISO": "2024-07-01", "rain": 2.4, "temperatureAvg": 22.1, "windMax": 28 },
+  { "stationId": "nussdorf-1", "dateISO": "2024-07-02", "rain": 0.0, "temperatureAvg": 24.2, "windMax": 22 },
+  { "stationId": "eisping-2", "dateISO": "2024-07-01", "rain": 5.4, "temperatureAvg": 17.9, "windMax": 32 },
+  { "stationId": "eisping-2", "dateISO": "2024-07-02", "rain": 3.1, "temperatureAvg": 18.4, "windMax": 30 },
+  { "stationId": "seidnitz-3", "dateISO": "2024-07-01", "rain": 1.0, "temperatureAvg": 20.8, "windMax": 18 },
+  { "stationId": "seidnitz-3", "dateISO": "2024-07-02", "rain": 0.8, "temperatureAvg": 21.1, "windMax": 24 }
+]

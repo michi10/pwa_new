@@ -1,0 +1,26 @@
+[
+  {
+    "id": "nussdorf-1",
+    "name": "Nussdorf 1",
+    "latitude": 48.2821,
+    "longitude": 16.3628,
+    "elevation": 192,
+    "description": "Station im Wiener Weinbaugebiet"
+  },
+  {
+    "id": "eisping-2",
+    "name": "Eisping 2",
+    "latitude": 47.102,
+    "longitude": 13.123,
+    "elevation": 624,
+    "description": "Gebirgige Lage mit hoher Niederschlagstendenz"
+  },
+  {
+    "id": "seidnitz-3",
+    "name": "Seidnitz 3",
+    "latitude": 46.812,
+    "longitude": 15.512,
+    "elevation": 410,
+    "description": "Station im südsteirischen Hügelland"
+  }
+]
