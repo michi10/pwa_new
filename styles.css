@@ -511,23 +511,101 @@ select:focus-visible {
 }
 
 /* Modal */
+.modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+
 .modal::backdrop {
   background: rgba(16, 44, 65, 0.45);
   backdrop-filter: blur(4px);
 }
 
+.modal[open] {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: calc(clamp(48px, 18vh, 160px) + var(--safe-area-top)) clamp(14px, 6vw, 36px)
+           calc(20px + var(--safe-area-bottom));
+}
+
 .modal .card {
-  width: min(720px, 94vw);
-  border-radius: var(--radius-lg);
+  width: min(720px, 100%);
+  max-width: 100%;
+  max-height: calc(100dvh - var(--safe-area-bottom) - 64px);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--cws-surface-solid) 98%, transparent);
+  box-shadow: 0 28px 64px -32px rgba(16, 44, 65, 0.48);
+  scrollbar-gutter: stable both-edges;
+}
+
+.modal .card-head,
+.modal .card-foot {
+  padding-inline: clamp(20px, 5vw, 32px);
+}
+
+.modal .card-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: clamp(18px, 3vw, 24px) clamp(20px, 5vw, 32px);
+}
+
+.modal.closing .card {
+  pointer-events: none;
+}
+
+.modal[open] .card {
+  animation: modalSheetIn 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.modal.closing .card {
+  animation: modalSheetOut 260ms cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
 .legal-modal .card,
 .gate-modal .card {
-  width: min(640px, 92vw);
+  width: min(640px, 100%);
 }
 
 .metric-modal .card {
-  width: min(640px, 92vw);
+  width: min(640px, 100%);
+}
+
+:root.reduce .modal[open] .card,
+:root.reduce .modal.closing .card {
+  animation: none !important;
+  transform: none !important;
+}
+
+@keyframes modalSheetIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalSheetOut {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
 }
 
 .metric-body {
